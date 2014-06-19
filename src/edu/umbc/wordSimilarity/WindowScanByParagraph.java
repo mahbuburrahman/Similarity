@@ -38,7 +38,9 @@ public class WindowScanByParagraph {
 	private static int PUNCTUATION = 3;
 	private int DUMMY = -1;
 
-	
+    public static String dataPath;
+    public static String dataPath1;
+
 
 	public WindowScanByParagraph(int window_size, String stopwordsFilename, String dirName, String modelName, String word1, String word2) throws IOException {
 		// TODO Auto-generated constructor stub
@@ -390,44 +392,58 @@ public class WindowScanByParagraph {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+        
+
 		
 		try {
-			//WindowScanByParagraph test = new WindowScanByParagraph(20, "/home/lushan1/nlp/model/usenet/stopwords", "/home/lushan1/nlp/newscorpus2", "/home/lushan1/nlp/model/usenet/usenetAllW21");
-			//WindowScanByParagraph test = new WindowScanByParagraph(3, "/home/lushan1/nlp/model/usenet/stopwords", "/home/lushan1/nlp/newscorpus2", "/home/lushan1/nlp/model/usenet/usenetAllW4");
-			//WindowScanByParagraph test = new WindowScanByParagraph(20, "/home/lushan1/nlp/model/Gutenberg2006/stopwords", "/home/lushan1/nlp/Gutenberg2006Books", "/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW21");
-			//WindowScanByParagraph test = new WindowScanByParagraph(3, "/home/lushan1/nlp/model/Gutenberg2006/stopwords", "/home/lushan1/nlp/Gutenberg2006Books", "/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW4");
-			//WindowScanByParagraph test = new WindowScanByParagraph(3, "/home/lushan1/nlp/model/Gutenberg2006/stopwords", "/home/lushan1/nlp/Gutenberg2006Books", "/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW4");
+			//WindowScanByParagraph test = new WindowScanByParagraph(20, dataPath+"/model/usenet/stopwords", dataPath+"/newscorpus2", dataPath+"/model/usenet/usenetAllW21");
+			//WindowScanByParagraph test = new WindowScanByParagraph(3, dataPath+"/model/usenet/stopwords", dataPath+"/newscorpus2", dataPath+"/model/usenet/usenetAllW4");
+			//WindowScanByParagraph test = new WindowScanByParagraph(20, dataPath+"/model/Gutenberg2006/stopwords", dataPath+"/Gutenberg2006Books", dataPath+"/model/Gutenberg2006/Gutenberg2006AllW21");
+			//WindowScanByParagraph test = new WindowScanByParagraph(3, dataPath+"/model/Gutenberg2006/stopwords", dataPath+"/Gutenberg2006Books", dataPath+"/model/Gutenberg2006/Gutenberg2006AllW4");
+			//WindowScanByParagraph test = new WindowScanByParagraph(3, dataPath+"/model/Gutenberg2006/stopwords", dataPath+"/Gutenberg2006Books", dataPath+"/model/Gutenberg2006/Gutenberg2006AllW4");
 			WindowScanByParagraph test;
 			
 			/*
 			if (args.length > 0)
-				test = new WindowScanByParagraph(5, "/home/lushan1/nlp/model/Gutenberg2010/stopwords", "/home/lushan1/nlp/Gutenberg2010Books", "/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW6", args[0], args[1]);
+				test = new WindowScanByParagraph(5, dataPath+"/model/Gutenberg2010/stopwords", dataPath+"/Gutenberg2010Books", dataPath+"/model/Gutenberg2010/Gutenberg2010AllW6", args[0], args[1]);
 			else
-				test = new WindowScanByParagraph(5, "/home/lushan1/nlp/model/Gutenberg2010/stopwords", "/home/lushan1/nlp/Gutenberg2010Books", "/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW6", "temperate", "mild");
+				test = new WindowScanByParagraph(5, dataPath+"/model/Gutenberg2010/stopwords", dataPath+"/Gutenberg2010Books", dataPath+"/model/Gutenberg2010/Gutenberg2010AllW6", "temperate", "mild");
 			*/
 			
 			/*
 			if (args.length > 0)
-				test = new WindowScanByParagraph(20, "/home/lushan1/nlp/model/Gutenberg2010/stopwords", "/home/lushan1/nlp/Gutenberg2010Books", "/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW21", args[0], args[1]);
+				test = new WindowScanByParagraph(20, dataPath+"/model/Gutenberg2010/stopwords", dataPath+"/Gutenberg2010Books", dataPath+"/model/Gutenberg2010/Gutenberg2010AllW21", args[0], args[1]);
 			else
-				test = new WindowScanByParagraph(20, "/home/lushan1/nlp/model/Gutenberg2010/stopwords", "/home/lushan1/nlp/Gutenberg2010Books", "/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW21", "temperate", "mild");
+				test = new WindowScanByParagraph(20, dataPath+"/model/Gutenberg2010/stopwords", dataPath+"/Gutenberg2010Books", dataPath+"/model/Gutenberg2010/Gutenberg2010AllW21", "temperate", "mild");
 			
 			if (args.length > 0)
-				test = new WindowScanByParagraph(10, "/home/lushan1/nlp/model/Gutenberg2010/stopwords", "/home/lushan1/nlp/Gutenberg2010Books", "/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW11", args[0], args[1]);
+				test = new WindowScanByParagraph(10, dataPath+"/model/Gutenberg2010/stopwords", dataPath+"/Gutenberg2010Books", dataPath+"/model/Gutenberg2010/Gutenberg2010AllW11", args[0], args[1]);
 			else
-				test = new WindowScanByParagraph(10, "/home/lushan1/nlp/model/Gutenberg2010/stopwords", "/home/lushan1/nlp/Gutenberg2010Books", "/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW11", "temperate", "mild");
+				test = new WindowScanByParagraph(10, dataPath+"/model/Gutenberg2010/stopwords", dataPath+"/Gutenberg2010Books", dataPath+"/model/Gutenberg2010/Gutenberg2010AllW11", "temperate", "mild");
 			*/
 			
 			/*
 			if (args.length > 0)
-				test = new WindowScanByParagraph(20, "/home/lushan1/nlp/model/Gutenberg2010/stopwords", "/home/lushan1/nlp/test", "/home/lushan1/nlp/model/test/Gutenberg2010AllW21", args[0], args[1]);
+				test = new WindowScanByParagraph(20, dataPath+"/model/Gutenberg2010/stopwords", dataPath+"/test", dataPath+"/model/test/Gutenberg2010AllW21", args[0], args[1]);
 			else
-				test = new WindowScanByParagraph(20, "/home/lushan1/nlp/model/Gutenberg2010/stopwords", "/home/lushan1/nlp/test", "/home/lushan1/nlp/model/test/Gutenberg2010AllW21", "temperate", "mild");\
+				test = new WindowScanByParagraph(20, dataPath+"/model/Gutenberg2010/stopwords", dataPath+"/test", dataPath+"/model/test/Gutenberg2010AllW21", "temperate", "mild");\
 			*/
 
 			if (args.length == 3){
 				int size = Integer.parseInt(args[0]);
-				test = new WindowScanByParagraph(size, "/home/lushan1/nlp/model/Gutenberg2010/stopwords", "/home/lushan1/nlp/Gutenberg2010Books", "/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW" + (size + 1), args[1], args[2]);
+				test = new WindowScanByParagraph(size, dataPath+"/model/Gutenberg2010/stopwords", dataPath+"/Gutenberg2010Books", dataPath+"/model/Gutenberg2010/Gutenberg2010AllW" + (size + 1), args[1], args[2]);
 				test.run();
 			}else {
 				System.out.println("Argument is not correct!");

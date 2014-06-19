@@ -32,6 +32,10 @@ public class PPMIModelByArrays {
 	//public int CO_OCCUR_THRESHOLD = 1;
 	//public double CONDITIONAL_THRESHOLD = (double) 0; // 1 / 4000;  1 / 1000;
 	
+    public static String dataPath;
+    public static String dataPath1;
+
+    
 	
 	public PPMIModelByArrays(String[] sortedTermList, String model_name){
 		vocabulary = sortedTermList;
@@ -533,7 +537,22 @@ public class PPMIModelByArrays {
 		
 		test.saveModel();
 		*/
-		PPMIModelByArrays test = new PPMIModelByArrays("/home/lushan1/nlp/model/PositivePMI/Gutenberg2010AllW2", false);
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
+		PPMIModelByArrays test = new PPMIModelByArrays(dataPath+"/model/PositivePMI/Gutenberg2010AllW2", false);
 		//test.saveModel();
 
 		//CoOccurModelByArrays test2 = new CoOccurModelByArrays("3esl");

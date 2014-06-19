@@ -35,8 +35,26 @@ public class CoOccurModelByTreeMap implements Serializable {
 	public boolean REMOVE_NON_FREQUENT_WORDS = true;
 	public int CO_OCCUR_THRESHOLD = 1;
 	public double CONDITIONAL_THRESHOLD = (double) 1 / 1000; // 1 / 1000;
+    
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	public CoOccurModelByTreeMap(String[] sortedTermList, String model_name){
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
 		vocabulary = sortedTermList;
 		sizeOfVocabulary = vocabulary.length;
 		
@@ -53,6 +71,19 @@ public class CoOccurModelByTreeMap implements Serializable {
 	
 	public CoOccurModelByTreeMap(String filename, boolean existAlert){
 		
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
 		try{
 		
 			modelName = filename;
@@ -554,8 +585,24 @@ public class CoOccurModelByTreeMap implements Serializable {
 		System.out.println(test.getCoOccurrence("dog_NN", "dog_NN"));
 		System.out.println(test.getCoOccurrence("cat_NN", "cat_NN"));
 		System.out.println("frequency is " + test.getFrequency("dog_NN"));
+         
 		*/
-        FileInputStream fileIn = new FileInputStream("/home/lushan1/nlp/test/model/test.mdl2");
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
+        FileInputStream fileIn = new FileInputStream(dataPath+"/test/model/test.mdl2");
         ObjectInputStream objIn = new ObjectInputStream(fileIn);
         CoOccurModelByTreeMap test2 = (CoOccurModelByTreeMap) objIn.readObject();
 

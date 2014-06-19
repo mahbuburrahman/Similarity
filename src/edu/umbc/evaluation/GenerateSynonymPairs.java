@@ -15,15 +15,34 @@ public class GenerateSynonymPairs {
 	String POS;
 	public CoOccurModelByArrays model;
 	private PrintWriter synonymPairsOut;
+    
+    public static String dataPath;
+    public static String dataPath1;
+
 
 	public GenerateSynonymPairs(String InfileName, String pos, String modelname) {
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
 		// TODO Auto-generated constructor stub
 		try{
 			File synonymCollection = new File(InfileName);
 			synonymReader = new BufferedReader(new FileReader(synonymCollection));
 			POS = pos;
 			
-			synonymPairsOut = new PrintWriter(new FileWriter("/home/lushan1/nlp/evaluation/synonymPairs_all_" + POS + ".txt"));
+			synonymPairsOut = new PrintWriter(new FileWriter(dataPath+"/evaluation/synonymPairs_all_" + POS + ".txt"));
 			model = new CoOccurModelByArrays(modelname, false);
 			
 		} catch (Exception e){
@@ -76,8 +95,22 @@ public class GenerateSynonymPairs {
 	 */
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		GenerateSynonymPairs run = new GenerateSynonymPairs("/home/lushan1/nlp/evaluation/advSynonyms700.txt", "RB", 
-				"/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW41");
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
+		GenerateSynonymPairs run = new GenerateSynonymPairs(dataPath+"/evaluation/advSynonyms700.txt", "RB", 
+				dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW41");
 		
 		run.process();
 		

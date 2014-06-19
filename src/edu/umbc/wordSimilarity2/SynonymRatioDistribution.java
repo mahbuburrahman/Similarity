@@ -31,6 +31,9 @@ public class SynonymRatioDistribution {
 	private Vector<String[]> adv_pairs = new Vector<String[]>();
 	private double[][] adv_ratios;  
 	
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	
 	public SynonymRatioDistribution(String nounFilename, String verbFilename, String adjFilename, String advFilename, String overallModelname, int trials) throws IOException {
@@ -283,11 +286,26 @@ public class SynonymRatioDistribution {
 	 */
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		SynonymRatioDistribution run = new SynonymRatioDistribution("/home/lushan1/nlp/evaluation/synonymPairs_1sense_NN.txt", "/home/lushan1/nlp/evaluation/synonymPairs_1sense_VB.txt", 
-				"/home/lushan1/nlp/evaluation/synonymPairs_1sense_JJ.txt", "/home/lushan1/nlp/evaluation/synonymPairs_1sense_RB.txt", "/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW41", 10);
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
+		SynonymRatioDistribution run = new SynonymRatioDistribution(dataPath+"/evaluation/synonymPairs_1sense_NN.txt", dataPath+"/evaluation/synonymPairs_1sense_VB.txt",
+				dataPath+"/evaluation/synonymPairs_1sense_JJ.txt", dataPath+"/evaluation/synonymPairs_1sense_RB.txt", dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW41", 10);
 		
 		for (int i=0; i<10; i++){
-			run.process("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW" + (6 + i), i);
+			run.process(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW" + (6 + i), i);
 			
 			System.out.println("process " + i + " is done.");
 		}

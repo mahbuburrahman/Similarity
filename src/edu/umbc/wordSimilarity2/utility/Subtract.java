@@ -4,6 +4,10 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+
 import edu.umbc.wordSimilarity2.CoOccurModelByArrays;
 
 
@@ -11,6 +15,9 @@ public class Subtract {
 
 	public CoOccurModelByArrays model1;
 	public CoOccurModelByArrays model2;
+    public static String dataPath;
+    public static String dataPath1;
+
 
 	public Subtract(String bigModelName, String smallModelName) {
 		// TODO Auto-generated constructor stub
@@ -69,22 +76,36 @@ public class Subtract {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+        
 
+        
 		/*
 		ModelUtility utility;
 		
 		for (int i=16; i<18; i++){
 			
-			utility = new ModelUtility("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW" + (i+1), "/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW" + i);
-			utility.SaveDifferenceAsModel("/home/lushan1/nlp/model/Gutenberg2010sfd/distribution/Gutenberg2010AllAt" + i);
+			utility = new ModelUtility(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW" + (i+1), dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW" + i);
+			utility.SaveDifferenceAsModel(dataPath+"/model/Gutenberg2010sfd/distribution/Gutenberg2010AllAt" + i);
 			utility = null;
 			System.gc();
 			System.out.println(i + " is done.");
 		}
 		*/
 		
-		Subtract utility = new Subtract("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW41", "/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW6");
-		utility.SaveDifferenceAsModel("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010W6to41");
+		Subtract utility = new Subtract(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW41", dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW6");
+		utility.SaveDifferenceAsModel(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010W6to41");
 		utility = null;
 		System.gc();
 		System.out.println("work is done.");

@@ -33,7 +33,9 @@ public class PromotedPMIMapEvaluation {
 	public boolean printSum;
 	public String parameter;
 	
-	
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	public PromotedPMIMapEvaluation(String InfileName, String pos) {
 		// TODO Auto-generated constructor stub
@@ -218,36 +220,50 @@ public class PromotedPMIMapEvaluation {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
 		PromotedPMIMapEvaluation test;
 		int totalEntries;
 		
 		if (args.length > 0){
 			
 			if (args[0].equals("VB")){
-				test = new PromotedPMIMapEvaluation("/home/lushan1/nlp/evaluation/verbSynonyms700.txt", "VB");
+				test = new PromotedPMIMapEvaluation(dataPath+"/evaluation/verbSynonyms700.txt", "VB");
 				totalEntries = 1187;
 				
 			}else if (args[0].equals("NN")){
-				test = new PromotedPMIMapEvaluation("/home/lushan1/nlp/evaluation/nounSynonyms700.txt", "NN");
+				test = new PromotedPMIMapEvaluation(dataPath+"/evaluation/nounSynonyms700.txt", "NN");
 				totalEntries = 2286;
 				
 			}else if (args[0].equals("JJ")){
-				test = new PromotedPMIMapEvaluation("/home/lushan1/nlp/evaluation/adjSynonyms700.txt", "JJ");
+				test = new PromotedPMIMapEvaluation(dataPath+"/evaluation/adjSynonyms700.txt", "JJ");
 				totalEntries = 1015;
 				
 			}else if (args[0].equals("RB")){
-				test = new PromotedPMIMapEvaluation("/home/lushan1/nlp/evaluation/advSynonyms700.txt", "RB");
+				test = new PromotedPMIMapEvaluation(dataPath+"/evaluation/advSynonyms700.txt", "RB");
 				totalEntries = 39;
 			}else{
 				throw new Exception("Wrong parameter: " + args[0]);
 			}
 			
 		}else{
-			test = new PromotedPMIMapEvaluation("/home/lushan1/nlp/evaluation/nounSynonyms700.txt", "NN");
+			test = new PromotedPMIMapEvaluation(dataPath+"/evaluation/nounSynonyms700.txt", "NN");
 			totalEntries = 2286;
 		}
 		
-		test.set("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW", 41, 700, 0 );
+		test.set(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW", 41, 700, 0 );
 		
 		
 		double bsf = 700;

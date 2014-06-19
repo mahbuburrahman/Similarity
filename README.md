@@ -13,4 +13,6 @@ Command to compile:
 
 
 Command to run the program:
-	java -cp . edu.umbc.dbpedia.model.STS_Example
+	java -Xmx2g -cp . edu.umbc.wordSimilarity2.WindowScanByStanfordPOS 0 "US" "USA"
+
+	

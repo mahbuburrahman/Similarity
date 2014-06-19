@@ -58,6 +58,9 @@ public class PromotedPMI_PPMIC_Evaluation {
 	public boolean printSum;
 	public String parameter;
 	
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	
 	public PromotedPMI_PPMIC_Evaluation(String InfileName, String pos) {
@@ -578,6 +581,20 @@ public class PromotedPMI_PPMIC_Evaluation {
 	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
 		
 		PromotedPMI_PPMIC_Evaluation test;
 		int totalEntries;
@@ -585,30 +602,30 @@ public class PromotedPMI_PPMIC_Evaluation {
 		if (args.length > 0){
 			
 			if (args[0].equals("VB")){
-				test = new PromotedPMI_PPMIC_Evaluation("/home/lushan1/nlp/evaluation/verbSynonyms700.txt", "VB");
+				test = new PromotedPMI_PPMIC_Evaluation(dataPath+"/evaluation/verbSynonyms700.txt", "VB");
 				totalEntries = 1187;
 				
 			}else if (args[0].equals("NN")){
-				test = new PromotedPMI_PPMIC_Evaluation("/home/lushan1/nlp/evaluation/nounSynonyms700.txt", "NN");
+				test = new PromotedPMI_PPMIC_Evaluation(dataPath+"/evaluation/nounSynonyms700.txt", "NN");
 				totalEntries = 2286;
 				
 			}else if (args[0].equals("JJ")){
-				test = new PromotedPMI_PPMIC_Evaluation("/home/lushan1/nlp/evaluation/adjSynonyms700.txt", "JJ");
+				test = new PromotedPMI_PPMIC_Evaluation(dataPath+"/evaluation/adjSynonyms700.txt", "JJ");
 				totalEntries = 1015;
 				
 			}else if (args[0].equals("RB")){
-				test = new PromotedPMI_PPMIC_Evaluation("/home/lushan1/nlp/evaluation/advSynonyms700.txt", "RB");
+				test = new PromotedPMI_PPMIC_Evaluation(dataPath+"/evaluation/advSynonyms700.txt", "RB");
 				totalEntries = 39;
 			}else{
 				throw new Exception("Wrong parameter: " + args[0]);
 			}
 			
 		}else{
-			test = new PromotedPMI_PPMIC_Evaluation("/home/lushan1/nlp/evaluation/adjSynonyms700.txt", "JJ");
+			test = new PromotedPMI_PPMIC_Evaluation(dataPath+"/evaluation/adjSynonyms700.txt", "JJ");
 			totalEntries = 1015;
 		}
 		
-		test.set("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW", 41, "/home/lushan1/nlp/model/PositivePMI/Gutenberg2010AllW", 2, 700, 0 );
+		test.set(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW", 41, dataPath+"/model/PositivePMI/Gutenberg2010AllW", 2, 700, 0 );
 		
 		
 		double bsf = 700;

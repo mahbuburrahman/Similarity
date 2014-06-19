@@ -54,7 +54,9 @@ public class LSA_Evaluation {
 	public boolean printSum;
 	public String parameter;
 	
-	
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	public LSA_Evaluation(String InfileName, String pos) {
 		// TODO Auto-generated constructor stub
@@ -519,27 +521,41 @@ public class LSA_Evaluation {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
 		LSA_Evaluation test;
 		
 		if (args.length > 0){
 			
 			if (args[0].equals("VB"))
-				test = new LSA_Evaluation("/home/lushan1/nlp/evaluation/verbSynonyms700.txt", "VB");
+				test = new LSA_Evaluation(dataPath+"/evaluation/verbSynonyms700.txt", "VB");
 			else if (args[0].equals("NN"))
-				test = new LSA_Evaluation("/home/lushan1/nlp/evaluation/nounSynonyms700.txt", "NN");
+				test = new LSA_Evaluation(dataPath+"/evaluation/nounSynonyms700.txt", "NN");
 			else if (args[0].equals("JJ"))
-				test = new LSA_Evaluation("/home/lushan1/nlp/evaluation/adjSynonyms700.txt", "JJ");
+				test = new LSA_Evaluation(dataPath+"/evaluation/adjSynonyms700.txt", "JJ");
 			else if (args[0].equals("RB"))
-				test = new LSA_Evaluation("/home/lushan1/nlp/evaluation/advSynonyms700.txt", "RB");
+				test = new LSA_Evaluation(dataPath+"/evaluation/advSynonyms700.txt", "RB");
 			else{
 				throw new Exception("Wrong parameter: " + args[0]);
 			}
 			
 		}else
-			test = new LSA_Evaluation("/home/lushan1/nlp/evaluation/nounSynonyms700.txt", "NN");
+			test = new LSA_Evaluation(dataPath+"/evaluation/nounSynonyms700.txt", "NN");
 		
 		
-		test.set("/home/lushan1/nlp/model/SVD/Gutenberg2010AllW5", 700);
+		test.set(dataPath+"/model/SVD/Gutenberg2010AllW5", 700);
 		
 			
 		test.getStatisticForFirstSynonymInTheOnlySense();

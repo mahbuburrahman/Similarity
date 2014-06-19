@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashSet;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+
+
 import edu.smu.tspell.wordnet.Synset;
 import edu.smu.tspell.wordnet.WordNetDatabase;
 
@@ -22,11 +27,29 @@ public class ProperSynonymSampleFinder {
 	public int count = 0;
 	public double dominatingThreshold = 0.65;
 	
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	public ProperSynonymSampleFinder(String word_type) throws IOException {
 		// TODO Auto-generated constructor stub
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
 		pos = word_type.toLowerCase();
-		model = new CoOccurModelByArrays("/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW21", false);
+		model = new CoOccurModelByArrays(dataPath+"/model/Gutenberg2010/Gutenberg2010AllW21", false);
 		System.setProperty("wordnet.database.dir", "/opt/WordNet-3.0/dict/");
 		database = WordNetDatabase.getFileInstance();
 		synonymPairs = new LinkedHashSet<String>();

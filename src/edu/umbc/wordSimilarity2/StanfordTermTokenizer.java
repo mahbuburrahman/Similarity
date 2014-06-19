@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+import java.io.FileReader;
+
+
 import edu.stanford.nlp.process.Morphology;
 
 public class StanfordTermTokenizer {
@@ -22,6 +25,9 @@ public class StanfordTermTokenizer {
 	String nextTaggedWord;
 	String nextWord;
 	String nextPosTag;
+
+    public static String dataPath;
+    public static String dataPath1;
 
 	
 	public StanfordTermTokenizer(String paragraph_par, String[] stopwords_par, Morphology morpha_par, String[] vocabulary_par) {
@@ -295,9 +301,23 @@ public class StanfordTermTokenizer {
 	 */
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
 
 		Morphology morph = new Morphology();
-		LSA_Model test1 = new LSA_Model("/home/lushan1/nlp/model/SVD/20120611/Gutenberg2010AllW5");
+		LSA_Model test1 = new LSA_Model(dataPath+"/model/SVD/20120611/Gutenberg2010AllW5");
 
         InputStreamReader isReader = new InputStreamReader(System.in);
         BufferedReader bufReader = new BufferedReader(isReader);

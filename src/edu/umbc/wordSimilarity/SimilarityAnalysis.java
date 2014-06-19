@@ -26,6 +26,9 @@ public class SimilarityAnalysis {
 	//public static float CORPUS_PMI_DELTA = 1;
 	public int numberOfCombinedPMI = 0;
 
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	public SimilarityAnalysis(String modelName) {
 		// TODO Auto-generated constructor stub
@@ -1867,25 +1870,40 @@ public class SimilarityAnalysis {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model2/Gutenberg2006AllW16/3esl_toefl", "/home/lushan1/nlp/model/Gutenberg2006/1212/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model2/Gutenberg2006AllW16/3esl_toefl");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/usenet/usenetAllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW4", "/home/lushan1/nlp/model/usenet/usenetAllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW4", "/home/lushan1/nlp/model/Gutenberg2006/1212/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW21", "/home/lushan1/nlp/model2/Gutenberg2006AllW16/3esl_toefl");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW21", "/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/usenet/usenetAllW21", "/home/lushan1/nlp/model/usenet/usenetAllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/1226/Gutenberg2006AllW21", "/home/lushan1/nlp/model/Gutenberg2006/1226/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/0204/Gutenberg2006AllW21", "/home/lushan1/nlp/model/Gutenberg2006/0204/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW21", "/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2010/0221/Gutenberg2010AllW21");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW4", "/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW4to21");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2010pos/Gutenberg2010AllW21"); //, "/home/lushan1/nlp/model/Gutenberg2010pos/Gutenberg2010AllW4");
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
 
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2010pos/Gutenberg2010AllW21"); //, "/home/lushan1/nlp/model/Gutenberg2010pos/Gutenberg2010AllW4");
-		SimilarityAnalysis test = new SimilarityAnalysis("web"); //, "/home/lushan1/nlp/model/Gutenberg2010pos/Gutenberg2010AllW4");
+        
+		// TODO Auto-generated method stub
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model2/Gutenberg2006AllW16/3esl_toefl", dataPath+"/model/Gutenberg2006/1212/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model2/Gutenberg2006AllW16/3esl_toefl");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/usenet/usenetAllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/Gutenberg2006AllW4", dataPath+"/model/usenet/usenetAllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/Gutenberg2006AllW4", dataPath+"/model/Gutenberg2006/1212/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/Gutenberg2006AllW21", dataPath+"/model2/Gutenberg2006AllW16/3esl_toefl");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/Gutenberg2006AllW21", dataPath+"/model/Gutenberg2006/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/usenet/usenetAllW21", dataPath+"/model/usenet/usenetAllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/1226/Gutenberg2006AllW21", dataPath+"/model/Gutenberg2006/1226/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/0204/Gutenberg2006AllW21", dataPath+"/model/Gutenberg2006/0204/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2010/Gutenberg2010AllW21", dataPath+"/model/Gutenberg2010/Gutenberg2010AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2010/0221/Gutenberg2010AllW21");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2010/Gutenberg2010AllW4", dataPath+"/model/Gutenberg2010/Gutenberg2010AllW4to21");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2010pos/Gutenberg2010AllW21"); //, dataPath+"/model/Gutenberg2010pos/Gutenberg2010AllW4");
+
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2010pos/Gutenberg2010AllW21"); //, dataPath+"/model/Gutenberg2010pos/Gutenberg2010AllW4");
+		SimilarityAnalysis test = new SimilarityAnalysis("web"); //, dataPath+"/model/Gutenberg2010pos/Gutenberg2010AllW4");
 
 		
 		System.out.println("Press any key to continue ...");

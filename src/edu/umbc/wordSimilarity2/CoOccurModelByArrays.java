@@ -30,6 +30,11 @@ public class CoOccurModelByArrays {
 	public boolean REMOVE_NON_FREQUENT_WORDS = true;
 	public int CO_OCCUR_THRESHOLD = 1;
 	public double CONDITIONAL_THRESHOLD = (double) 0; // 1 / 4000;  1 / 1000;
+
+    public static String dataPath;
+    public static String dataPath1;
+
+    
 	
 	
 	public CoOccurModelByArrays(String[] sortedTermList, String model_name){
@@ -49,7 +54,7 @@ public class CoOccurModelByArrays {
 	
 	
 	public CoOccurModelByArrays(String filename, boolean existAlert, int frequencyThreshold, double conditionalThreshold ){
-		
+     	
 		try{
 			FREQUENCY_LIMIT = frequencyThreshold;
 			CONDITIONAL_THRESHOLD = conditionalThreshold;
@@ -1190,7 +1195,22 @@ public class CoOccurModelByArrays {
 		
 		test.saveModel();
 		*/
-		CoOccurModelByArrays test = new CoOccurModelByArrays("/home/lushan1/nlp/model/Gutenberg2010sfd/20120611/Gutenberg2010AllW41", false);
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
+		CoOccurModelByArrays test = new CoOccurModelByArrays(dataPath+"/model/Gutenberg2010sfd/20120611/Gutenberg2010AllW41", false);
 		//test.saveModel();
 
 		//CoOccurModelByArrays test2 = new CoOccurModelByArrays("3esl");

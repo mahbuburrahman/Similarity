@@ -29,7 +29,9 @@ public class SynonymPairDistribution {
 	private Vector<String[]> adv_pairs = new Vector<String[]>();
 	private double[][] adv_array;  
 	
-	
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	public SynonymPairDistribution(String nounFilename, String verbFilename, String adjFilename, String advFilename, String overallModelname, int windowSize) throws IOException {
 		// TODO Auto-generated constructor stub
@@ -273,11 +275,25 @@ public class SynonymPairDistribution {
 	 */
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		//SynonymPairDistribution run = new SynonymPairDistribution("/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW4", "/home/lushan1/nlp/model/Gutenberg2010/0221/Gutenberg2010AllW21", "synonym_pairs_noun");
-		SynonymPairDistribution run = new SynonymPairDistribution("synonym_pairs_noun.txt", "synonym_pairs_verb.txt", "synonym_pairs_adj.txt", "synonym_pairs_adv.txt", "/home/lushan1/nlp/model/Gutenberg2010/collection2/Gutenberg2010AllW21", 20);
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
+		//SynonymPairDistribution run = new SynonymPairDistribution(dataPath+"/model/Gutenberg2010/Gutenberg2010AllW4", dataPath+"/model/Gutenberg2010/0221/Gutenberg2010AllW21", "synonym_pairs_noun");
+		SynonymPairDistribution run = new SynonymPairDistribution("synonym_pairs_noun.txt", "synonym_pairs_verb.txt", "synonym_pairs_adj.txt", "synonym_pairs_adv.txt", dataPath+"/model/Gutenberg2010/collection2/Gutenberg2010AllW21", 20);
 		
 		for (int i=1; i<21; i++){
-			run.process("/home/lushan1/nlp/model/Gutenberg2010/distribution/Gutenberg2010AllAt", i);
+			run.process(dataPath+"/model/Gutenberg2010/distribution/Gutenberg2010AllAt", i);
 			System.out.println(i + " is done.");
 		}
 		

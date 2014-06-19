@@ -52,7 +52,10 @@ public class GroundPerformanceEvaluation {
 	public int numOfRanks500;
 	public boolean printSum;
 	
-	
+    public static String dataPath;
+    public static String dataPath1;
+
+    
 	
 	public GroundPerformanceEvaluation(String InfileName, String pos) {
 		// TODO Auto-generated constructor stub
@@ -557,12 +560,26 @@ public class GroundPerformanceEvaluation {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		
-		GroundPerformanceEvaluation test = new GroundPerformanceEvaluation("/home/lushan1/nlp/evaluation/verbSynonyms700_2000.txt", "VB");
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
+		GroundPerformanceEvaluation test = new GroundPerformanceEvaluation(dataPath+"/evaluation/verbSynonyms700_2000.txt", "VB");
 		
 		//for (int i=6; i<=71; i += 5){
 		for (int i=41; i<=41; i += 5){
 			
-			test.set("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW", i, 700, 0 );
+			test.set(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW", i, 700, 0 );
 			
 			//test.getStatisticForFirstSynonymInTheOnlySense();
 			//test.reset();

@@ -4,12 +4,20 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+
 import edu.umbc.wordSimilarity2.CoOccurModelByArrays;
 
 
 public class CoOccurrenceToPositivePMI {
 
 	public CoOccurModelByArrays model;
+    
+    public static String dataPath;
+    public static String dataPath1;
+
 
 	public CoOccurrenceToPositivePMI(String originalModelName) {
 		// TODO Auto-generated constructor stub
@@ -122,22 +130,35 @@ public class CoOccurrenceToPositivePMI {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
 
 		/*
 		ModelUtility utility;
 		
 		for (int i=16; i<18; i++){
 			
-			utility = new ModelUtility("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW" + (i+1), "/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW" + i);
-			utility.SaveDifferenceAsModel("/home/lushan1/nlp/model/Gutenberg2010sfd/distribution/Gutenberg2010AllAt" + i);
+			utility = new ModelUtility(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW" + (i+1), dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW" + i);
+			utility.SaveDifferenceAsModel(dataPath+"/model/Gutenberg2010sfd/distribution/Gutenberg2010AllAt" + i);
 			utility = null;
 			System.gc();
 			System.out.println(i + " is done.");
 		}
 		*/
 		
-		CoOccurrenceToPositivePMI utility = new CoOccurrenceToPositivePMI("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW2");
-		utility.SaveTranformedModel("/home/lushan1/nlp/model/PositivePMI/Gutenberg2010AllW2");
+		CoOccurrenceToPositivePMI utility = new CoOccurrenceToPositivePMI(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW2");
+		utility.SaveTranformedModel(dataPath+"/model/PositivePMI/Gutenberg2010AllW2");
 
 		System.out.println("Congratulation! Task Finished.");
 

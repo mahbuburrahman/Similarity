@@ -53,6 +53,9 @@ public class ConditionalPromotedPMIEvaluation {
 	public int numOfRanks500;
 	public boolean printSum;
 	
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	
 	public ConditionalPromotedPMIEvaluation(String InfileName, String pos) {
@@ -541,9 +544,23 @@ public class ConditionalPromotedPMIEvaluation {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		
-		ConditionalPromotedPMIEvaluation test = new ConditionalPromotedPMIEvaluation("/home/lushan1/nlp/evaluation/nounSynonyms700.txt", "NN");
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
+		ConditionalPromotedPMIEvaluation test = new ConditionalPromotedPMIEvaluation(dataPath+"/evaluation/nounSynonyms700.txt", "NN");
 		
-		test.set("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW", 41, 700, 0 );
+		test.set(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW", 41, 700, 0 );
 		
 		for (int i = 0; i < 8; i++){
 			

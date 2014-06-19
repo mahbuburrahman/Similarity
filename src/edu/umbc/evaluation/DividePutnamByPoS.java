@@ -18,16 +18,20 @@ import edu.umbc.wordSimilarity2.CoOccurModelByArrays;
 
 public class DividePutnamByPoS {
 
+    public static String dataPath;
+    public static String dataPath1;
+
+    
 	public BufferedReader textReader = null;
 	public StringBuffer paragraph;
 	public int paragraph_lines = 0;
-	public String nounFilename = "/home/lushan1/nlp/evaluation/nounSynonyms700_2000.txt";
+	public String nounFilename ;//= dataPath+"/evaluation/nounSynonyms700_2000.txt";
 	private PrintWriter outOfNoun;
-	public String verbFilename = "/home/lushan1/nlp/evaluation/verbSynonyms700_2000.txt";
+	public String verbFilename ;//dataPath+"/evaluation/verbSynonyms700_2000.txt";
 	private PrintWriter outOfVerb;
-	public String adjFilename = "/home/lushan1/nlp/evaluation/adjSynonyms700_2000.txt";
+	public String adjFilename ;// dataPath+"/evaluation/adjSynonyms700_2000.txt";
 	private PrintWriter outOfAdjective;
-	public String advFilename = "/home/lushan1/nlp/evaluation/advSynonyms700_2000.txt";
+	public String advFilename ;//dataPath+"/evaluation/advSynonyms700_2000.txt";
 	private PrintWriter outOfAdverb;
 	public CoOccurModelByArrays model;
 	public int threshold = 700;
@@ -39,7 +43,26 @@ public class DividePutnamByPoS {
 	
 	
 	public DividePutnamByPoS(String filename, String modelname){
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
 
+        
+        nounFilename = dataPath+"/evaluation/nounSynonyms700_2000.txt";
+        verbFilename = dataPath+"/evaluation/verbSynonyms700_2000.txt";
+        adjFilename = dataPath+"/evaluation/adjSynonyms700_2000.txt";
+        advFilename = dataPath+"/evaluation/advSynonyms700_2000.txt";
+        
 		try{
 			File textCorpus = new File(filename);
 			textReader = new BufferedReader(new FileReader(textCorpus), 1000000);
@@ -267,7 +290,22 @@ public class DividePutnamByPoS {
 	 */
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		DividePutnamByPoS test = new DividePutnamByPoS("/home/lushan1/nlp/evaluation/AllSynonymPairs.txt", "/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW41");
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
+		DividePutnamByPoS test = new DividePutnamByPoS(dataPath+"/evaluation/AllSynonymPairs.txt", dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW41");
 		test.process();
 		test.close();
 		System.out.println("total noun pairs is " + test.totalNounPairs);

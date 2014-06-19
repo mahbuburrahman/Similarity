@@ -23,7 +23,9 @@ public class LSA_Model {
 	public int frequency[];
 	public String modelName;
 	public int FREQUENCY_LIMIT = 700; 
-	
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	public LSA_Model(String filename){
 		this(filename, 700);
@@ -346,10 +348,24 @@ public class LSA_Model {
 		test.saveModel();
 		*/
 		
-		LSA_Model test1 = new LSA_Model("/home/lushan1/nlp/model/SVD/Gutenberg2010AllW5");
-		LSA_Model test2 = new LSA_Model("/home/lushan1/nlp/model/SVD/Wikipedia2006AllW5");
-		LSA_Model test3 = new LSA_Model("/home/lushan1/nlp/model/SVD/20120611/Wikipedia2006AllW5");
-		//LSA_Model test3 = new LSA_Model("/home/lushan1/nlp/model/SVD/Wikipedia2006AllW3");
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
+		LSA_Model test1 = new LSA_Model(dataPath+"/model/SVD/Gutenberg2010AllW5");
+		LSA_Model test2 = new LSA_Model(dataPath+"/model/SVD/Wikipedia2006AllW5");
+		LSA_Model test3 = new LSA_Model(dataPath+"/model/SVD/20120611/Wikipedia2006AllW5");
+		//LSA_Model test3 = new LSA_Model(dataPath+"/model/SVD/Wikipedia2006AllW3");
 
 		//CoOccurModelByArrays test2 = new CoOccurModelByArrays("3esl");
 		

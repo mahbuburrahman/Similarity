@@ -28,6 +28,10 @@ public class SimilarityAnalysisWithPOS {
 	//public static float CORPUS_PMI_DELTA = 1;
 	public int numberOfCombinedPMI = 0;
 	public String testFileName = "toefl_pos.tst";
+    
+    public static String dataPath;
+    public static String dataPath1;
+
 
 	public SimilarityAnalysisWithPOS(String modelName, boolean isPPMIModel) {
 		// TODO Auto-generated constructor stub
@@ -2198,33 +2202,47 @@ public class SimilarityAnalysisWithPOS {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
 		// TODO Auto-generated method stub
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model2/Gutenberg2006AllW16/3esl_toefl", "/home/lushan1/nlp/model/Gutenberg2006/1212/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model2/Gutenberg2006AllW16/3esl_toefl");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/usenet/usenetAllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW4", "/home/lushan1/nlp/model/usenet/usenetAllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW4", "/home/lushan1/nlp/model/Gutenberg2006/1212/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW21", "/home/lushan1/nlp/model2/Gutenberg2006AllW16/3esl_toefl");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW21", "/home/lushan1/nlp/model/Gutenberg2006/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/usenet/usenetAllW21", "/home/lushan1/nlp/model/usenet/usenetAllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/1226/Gutenberg2006AllW21", "/home/lushan1/nlp/model/Gutenberg2006/1226/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2006/0204/Gutenberg2006AllW21", "/home/lushan1/nlp/model/Gutenberg2006/0204/Gutenberg2006AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW21", "/home/lushan1/nlp/model/Gutenberg2010/Gutenberg2010AllW4");
-		//SimilarityAnalysis test = new SimilarityAnalysis("/home/lushan1/nlp/model/Gutenberg2010/0221/Gutenberg2010AllW21");
-		//SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW21", "/home/lushan1/nlp/model/Gutenberg2010/collection2/Gutenberg2010AllW21");
-		//SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW31", "/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW21");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model2/Gutenberg2006AllW16/3esl_toefl", dataPath+"/model/Gutenberg2006/1212/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model2/Gutenberg2006AllW16/3esl_toefl");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/usenet/usenetAllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/Gutenberg2006AllW4", dataPath+"/model/usenet/usenetAllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/Gutenberg2006AllW4", dataPath+"/model/Gutenberg2006/1212/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/Gutenberg2006AllW21", dataPath+"/model2/Gutenberg2006AllW16/3esl_toefl");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/Gutenberg2006AllW21", dataPath+"/model/Gutenberg2006/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/usenet/usenetAllW21", dataPath+"/model/usenet/usenetAllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/1226/Gutenberg2006AllW21", dataPath+"/model/Gutenberg2006/1226/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2006/0204/Gutenberg2006AllW21", dataPath+"/model/Gutenberg2006/0204/Gutenberg2006AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2010/Gutenberg2010AllW21", dataPath+"/model/Gutenberg2010/Gutenberg2010AllW4");
+		//SimilarityAnalysis test = new SimilarityAnalysis(dataPath+"/model/Gutenberg2010/0221/Gutenberg2010AllW21");
+		//SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW21", dataPath+"/model/Gutenberg2010/collection2/Gutenberg2010AllW21");
+		//SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW31", dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW21");
 
 
 		
-		//SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW41", false);
-		SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS("/home/lushan1/nlp/model/Wikipedia2006sfd/Wikipedia2006AllW5", false);
+		//SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW41", false);
+		SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS(dataPath+"/model/Wikipedia2006sfd/Wikipedia2006AllW5", false);
 		test.model1.FREQUENCY_LIMIT = 0;
 		test.model1.CONDITIONAL_THRESHOLD = 0; 
 
-		//SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS("/home/lushan1/nlp/model/PositivePMI/Gutenberg2010AllW2", true);
+		//SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS(dataPath+"/model/PositivePMI/Gutenberg2010AllW2", true);
 		
-		//SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW41", "/home/lushan1/nlp/model/PositivePMI/Gutenberg2010AllW2", true);
+		//SimilarityAnalysisWithPOS test = new SimilarityAnalysisWithPOS(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW41", dataPath+"/model/PositivePMI/Gutenberg2010AllW2", true);
 		
 		
 		System.out.println("Press any key to continue ...");

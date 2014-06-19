@@ -25,6 +25,10 @@ public class GenerateFrequencyAndNumberOfSenses {
 	private PrintWriter adjWriter;
 	private PrintWriter advWriter;
 	public CoOccurModelByArrays model;
+    
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	public GenerateFrequencyAndNumberOfSenses(String modelname, String fileOut) throws IOException {
 		// TODO Auto-generated constructor stub
@@ -119,7 +123,20 @@ public class GenerateFrequencyAndNumberOfSenses {
 	 */
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		GenerateFrequencyAndNumberOfSenses test = new GenerateFrequencyAndNumberOfSenses("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW41", "/home/lushan1/nlp/evaluation/frequency_senses");
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+		GenerateFrequencyAndNumberOfSenses test = new GenerateFrequencyAndNumberOfSenses(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW41", dataPath+"/evaluation/frequency_senses");
 		test.process();
 		System.out.println("Congratulation! Task finished.");
 	}

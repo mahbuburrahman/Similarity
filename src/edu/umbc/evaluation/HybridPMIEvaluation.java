@@ -54,7 +54,9 @@ public class HybridPMIEvaluation {
 	public boolean printSum;
 	public String parameter;
 	
-	
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	public HybridPMIEvaluation(String InfileName, String pos) {
 		// TODO Auto-generated constructor stub
@@ -592,28 +594,42 @@ public class HybridPMIEvaluation {
 	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+        
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
 		
 		HybridPMIEvaluation test;
 		
 		if (args.length > 0){
 			
 			if (args[0].equals("VB"))
-				test = new HybridPMIEvaluation("/home/lushan1/nlp/evaluation/verbSynonyms700.txt", "VB");
+				test = new HybridPMIEvaluation(dataPath+"/evaluation/verbSynonyms700.txt", "VB");
 			else if (args[0].equals("NN"))
-				test = new HybridPMIEvaluation("/home/lushan1/nlp/evaluation/nounSynonyms700.txt", "NN");
+				test = new HybridPMIEvaluation(dataPath+"/evaluation/nounSynonyms700.txt", "NN");
 			else if (args[0].equals("JJ"))
-				test = new HybridPMIEvaluation("/home/lushan1/nlp/evaluation/adjSynonyms700.txt", "JJ");
+				test = new HybridPMIEvaluation(dataPath+"/evaluation/adjSynonyms700.txt", "JJ");
 			else if (args[0].equals("RB"))
-				test = new HybridPMIEvaluation("/home/lushan1/nlp/evaluation/advSynonyms700.txt", "RB");
+				test = new HybridPMIEvaluation(dataPath+"/evaluation/advSynonyms700.txt", "RB");
 			else{
 				throw new Exception("Wrong parameter: " + args[0]);
 			}
 			
 		}else
-			test = new HybridPMIEvaluation("/home/lushan1/nlp/evaluation/verbSynonyms700.txt", "VB");
+			test = new HybridPMIEvaluation(dataPath+"/evaluation/verbSynonyms700.txt", "VB");
 		
 		
-		test.set("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW", 41, 700, 0 );
+		test.set(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW", 41, 700, 0 );
 		
 		double bsf = 700;
 		long startTime = System.currentTimeMillis();

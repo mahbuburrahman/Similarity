@@ -56,6 +56,9 @@ public class TwoWindowsEvaluation {
 	public int numOfRanks500;
 	public boolean printSum;
 	
+    public static String dataPath;
+    public static String dataPath1;
+
 		
 	public TwoWindowsEvaluation(String InfileName, String pos) {
 		// TODO Auto-generated constructor stub
@@ -619,10 +622,24 @@ public class TwoWindowsEvaluation {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		
-		TwoWindowsEvaluation test = new TwoWindowsEvaluation("/home/lushan1/nlp/evaluation/advSynonyms700.txt", "RB");
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
+        
+		TwoWindowsEvaluation test = new TwoWindowsEvaluation(dataPath+"/evaluation/advSynonyms700.txt", "RB");
 		
 		
-		test.set("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW41", "/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW6", 700, 0 );
+		test.set(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW41", dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW6", 700, 0 );
 		
 		test.getStatisticForFirstSynonymInTheOnlySense(10, 50, 1.0);
 		test.reset();

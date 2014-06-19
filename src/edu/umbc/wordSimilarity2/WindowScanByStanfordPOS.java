@@ -30,7 +30,9 @@ public class WindowScanByStanfordPOS {
 	private int debugWord2;
 	private boolean DEBUG_ON = true;
 
-	
+    public static String dataPath;
+    public static String dataPath1;
+
 
 	public WindowScanByStanfordPOS(int window_size, String stopwordsFilename, String dirName, String modelName, String word1, String word2) throws IOException {
 		// TODO Auto-generated constructor stub
@@ -324,29 +326,42 @@ public class WindowScanByStanfordPOS {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+
 		try {
 			WindowScanByStanfordPOS test;
 			
 			/*
-			test = new WindowScanByStanfordPOS(20, "/home/lushan1/nlp/model/Gutenberg2010sfd/stopwords", "/home/lushan1/nlp/test/corpus/9", 
-					"/home/lushan1/nlp/test/model/test", "temperate_JJ", "mild_JJ");
+			test = new WindowScanByStanfordPOS(20, dataPath+"/model/Gutenberg2010sfd/stopwords", dataPath+"/test/corpus/9",
+					dataPath+"/test/model/test", "temperate_JJ", "mild_JJ");
 
 			test.run();
 			*/
 			
 			if (args.length == 3){
 				int size = Integer.parseInt(args[0]);
-				test = new WindowScanByStanfordPOS(size, "/home/lushan1/nlp/model/Gutenberg2010sfd/stopwords", "/home/lushan1/nlp/Gutenberg2010Books", 
-						"/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010AllW" + (size + 1), args[1], args[2]);
+				test = new WindowScanByStanfordPOS(size, dataPath+"/model/Gutenberg2010sfd/stopwords", dataPath+"/Gutenberg2010Books",
+						dataPath+"/model/Gutenberg2010sfd/Gutenberg2010AllW" + (size + 1), args[1], args[2]);
 
-				//test = new WindowScanByStanfordPOS(size, "/home/lushan1/nlp/model/Wikipedia2006sfd/stopwords", "/home/lushan1/nlp/Wikipedia2006", 
-				//		"/home/lushan1/nlp/model/Wikipedia2006sfd/Wikipedia2006AllW" + (size + 1), args[1], args[2]);
+				//test = new WindowScanByStanfordPOS(size, dataPath+"/model/Wikipedia2006sfd/stopwords", "dataPath+"/Wikipedia2006",
+				//		dataPath+"/model/Wikipedia2006sfd/Wikipedia2006AllW" + (size + 1), args[1], args[2]);
 
-				//test = new WindowScanByStanfordPOS(size, "/home/lushan1/nlp/model/ukwac2012sfd/stopwords", "/home/lushan1/nlp/ukwac", 
-				//		"/home/lushan1/nlp/model/ukwac2012sfd/ukwac2012AllW" + (size + 1), args[1], args[2]);
+				//test = new WindowScanByStanfordPOS(size, "dataPath+"/model/ukwac2012sfd/stopwords", dataPath+"/ukwac",
+				//		dataPath+"/model/ukwac2012sfd/ukwac2012AllW" + (size + 1), args[1], args[2]);
 
-				//test = new WindowScanByStanfordPOS(size, "/home/lushan1/nlp/model/webbase2012sfd/stopwords", "/home/lushan1/nlp/webbase", 
-				//		"/home/lushan1/nlp/model/webbase2012sfd/webbase2012AllW" + (size + 1), args[1], args[2]);
+				//test = new WindowScanByStanfordPOS(size, "dataPath+"/model/webbase2012sfd/stopwords", dataPath+"/webbase",
+				//		dataPath+"/model/webbase2012sfd/webbase2012AllW" + (size + 1), args[1], args[2]);
 
 				
 				test.run();

@@ -53,7 +53,9 @@ public class DeltaWindowEvaluation {
 	public int numOfRanks500;
 	public boolean printSum;
 	
-	
+    public static String dataPath;
+    public static String dataPath1;
+
 	
 	public DeltaWindowEvaluation(String InfileName, String pos) {
 		// TODO Auto-generated constructor stub
@@ -541,9 +543,24 @@ public class DeltaWindowEvaluation {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		
-		DeltaWindowEvaluation test = new DeltaWindowEvaluation("/home/lushan1/nlp/evaluation/adjSynonyms700.txt", "JJ");
+        /* Read Path for model and data files */
+        try{
+            //InputStream input = new FileInputStream("../../../../../config.properties");
+            BufferedReader br = new BufferedReader(new FileReader("../../../../config.txt"));
+            dataPath = br.readLine();
+            dataPath1 = br.readLine();
+            //System.out.println("Yes"+dataPath);
+        }
+        catch (Exception e) {
+            //System.out.println("No");
+        }
+        /* End */
+        
+
+        
+		DeltaWindowEvaluation test = new DeltaWindowEvaluation(dataPath+"/evaluation/adjSynonyms700.txt", "JJ");
 		
-		test.set("/home/lushan1/nlp/model/Gutenberg2010sfd/Gutenberg2010W6to41", 41, 700, 0 );
+		test.set(dataPath+"/model/Gutenberg2010sfd/Gutenberg2010W6to41", 41, 700, 0 );
 		
 		test.getStatisticForFirstSynonymInTheOnlySense();
 		test.reset();
